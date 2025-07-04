@@ -10,7 +10,6 @@ android {
     namespace = "com.example.app1"
     compileSdk = flutter.compileSdkVersion
 
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -21,10 +20,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.app1"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -33,8 +29,11 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // ✅ Disable R8 / Proguard to fix Razorpay errors
+            isMinifyEnabled = false
+            isShrinkResources = false
+
+            // Using debug keys for release build (change to your own signing config in production)
             signingConfig = signingConfigs.getByName("debug")
         }
     }
